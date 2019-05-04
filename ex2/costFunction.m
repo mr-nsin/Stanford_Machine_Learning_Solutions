@@ -18,9 +18,16 @@ grad = zeros(size(theta));
 %               derivatives of the cost w.r.t. each parameter in theta
 %
 % Note: grad should have the same dimensions as theta
-%
 
+% Appying Linear Regression model.
+first = (y).*(log(sigmoid(X * theta)));
+second = (1.-y).*(log(1-sigmoid(X * theta)));
 
+%Calculating cost function
+J = -(1/m)*sum(first + second);
+
+%Calculating gradient descent for classification problem.s
+grad = (1/m)*(X' * (sigmoid(X*theta)-y));
 
 
 

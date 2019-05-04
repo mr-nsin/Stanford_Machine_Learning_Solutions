@@ -17,6 +17,25 @@ grad = zeros(size(theta));
 %               Compute the partial derivatives and set grad to the partial
 %               derivatives of the cost w.r.t. each parameter in theta
 
+first = (y).*(log(sigmoid(X * theta)));
+second = (1.-y).*(log(1-sigmoid(X * theta)));
+third = (lambda)/(2*m) *(theta.^2);
+
+%Calculating cost function
+J1 = -(1/m)*sum(first + second);
+
+%Don't regularize  Theta0.
+J2 = sum(third) - third(1);
+J = J1 + J2;
+
+% For calculating gradient descent we have different calculations for J = 0 and J >= 1
+temp = (1/m)*(X' * (sigmoid(X*theta)-y));
+grad = (1/m)*(X' * (sigmoid(X*theta)-y)) + (lambda/m)*theta;
+
+%Now Replacing theta0 calulated previously.
+grad(1) = temp(1);
+
+
 
 
 
