@@ -30,7 +30,11 @@ X = [ones(m, 1) X];
 %       for each row.
 %       
 
-
+for i = 1:m
+  %Calculating value of each row for every class (1X401)(401X10)
+  temp = X(i,:)*all_theta';
+  [garbage,p(i)] = max(temp,[],2);    
+endfor
 
 
 
